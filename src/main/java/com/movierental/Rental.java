@@ -18,7 +18,7 @@ public class Rental {
     return movie;
   }
 
-  public double amount() {
+  double amount() {
     double thisAmount = 0;
     switch (this.getMovie().getPriceCode()) {
       case Movie.REGULAR:
@@ -36,5 +36,17 @@ public class Rental {
         break;
     }
     return thisAmount;
+  }
+
+  int frequentRenterPoints() {
+    int frequentRenterPoints = 1;
+    if (isBonusApplicable()) frequentRenterPoints++;
+    return frequentRenterPoints;
+  }
+
+  private boolean isBonusApplicable() {
+    return (getMovie().getPriceCode() == Movie.NEW_RELEASE)
+            &&
+            getDaysRented() > 1;
   }
 }
