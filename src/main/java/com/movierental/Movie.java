@@ -6,20 +6,28 @@ public class Movie {
   public static final int NEW_RELEASE = 1;
 
   private String title;
-  private int priceCode;
+  private PriceCode priceCode;
 
   public Movie(String title, int priceCode) {
     this.title = title;
-    this.priceCode = priceCode;
+    setPriceCode(priceCode);
   }
 
   public int getPriceCode() {
-    return priceCode;
+    return priceCode.getPriceCode();
   }
 
   public void setPriceCode(int arg) {
-    priceCode = arg;
+    switch (arg) {
+      case Movie.REGULAR: this.priceCode = new RegularPrice();
+        break;
+      case Movie.NEW_RELEASE: this.priceCode = new NewReleasePrice();
+        break;
+      case Movie.CHILDRENS: this.priceCode = new ChildrenPrice();
+        break;
+    }
   }
+
 
   public String getTitle() {
     return title;
